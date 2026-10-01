@@ -1,0 +1,10 @@
+## Chạy local
+
+1. docker compose up -d // docker ps: để kiểm tra xem container restaurant-mysql đã thực sự đang chạy hay chưa.
+2. cd backend && ./mvnw spring-boot:run
+3. cd frontend && cp .env.example .env && npm i && npm run dev
+
+
+
+ResponseDTO: Spring Boot trả về
+RequestDTO: React gửi xuống
