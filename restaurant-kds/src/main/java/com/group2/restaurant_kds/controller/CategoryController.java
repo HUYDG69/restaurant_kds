@@ -17,9 +17,9 @@ import com.group2.restaurant_kds.service.CategoryService;
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
-    CategoryService categoryService;
+    private final CategoryService categoryService;
 
-    public CategoryController(CategoryService categoryService, CategoryRepository categoryRepository){
+    public CategoryController(CategoryService categoryService){
         this.categoryService = categoryService;
     }
 

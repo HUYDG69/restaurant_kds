@@ -22,16 +22,14 @@ public class Bill {
     private Order order;
     private BigDecimal totalAmount;
     private BigDecimal discount;
-    private BigDecimal tax;
     private String paymentMethod;
     private LocalDateTime paidAt;
-    public Bill(Long id, Order order, BigDecimal totalAmount, BigDecimal discount, BigDecimal tax, String paymentMethod,
+    public Bill(Long id, Order order, BigDecimal totalAmount, BigDecimal discount, String paymentMethod,
             LocalDateTime paidAt) {
         this.id = id;
         this.order = order;
         this.totalAmount = totalAmount;
         this.discount = discount;
-        this.tax = tax;
         this.paymentMethod = paymentMethod;
         this.paidAt = paidAt;
     }
@@ -59,12 +57,6 @@ public class Bill {
     }
     public void setDiscount(BigDecimal discount) {
         this.discount = discount;
-    }
-    public BigDecimal getTax() {    
-        return tax;
-    }
-    public void setTax(BigDecimal tax) {
-        this.tax = tax;
     }
     public String getPaymentMethod() {
         return paymentMethod;

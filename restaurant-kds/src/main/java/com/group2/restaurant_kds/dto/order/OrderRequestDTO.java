@@ -6,11 +6,12 @@ import com.group2.restaurant_kds.dto.orderItem.OrderItemRequestDTO;
 
 public class OrderRequestDTO {
     private Long tableId;
-    private String orderType;  // tại chỗ hoặc giao 
+    private String orderType;
     private String note;
     
     private List<OrderItemRequestDTO> items;
-
+    private DeliveryInfoDTO deliveryInfo;
+    
     public Long getTableId() {
         return tableId;
     }
@@ -41,5 +42,13 @@ public class OrderRequestDTO {
 
     public void setItems(List<OrderItemRequestDTO> items) {
         this.items = items;
+    }
+
+    public DeliveryInfoDTO getDeliveryInfo() {
+        return deliveryInfo;
+    }
+
+    public void setDeliveryInfo(DeliveryInfoDTO deliveryInfo) {
+        this.deliveryInfo = deliveryInfo;
     } 
 }

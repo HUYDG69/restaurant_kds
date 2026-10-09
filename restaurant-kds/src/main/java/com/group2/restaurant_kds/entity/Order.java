@@ -2,13 +2,18 @@ package com.group2.restaurant_kds.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity 
@@ -37,12 +42,29 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "confirmed_by")
     private User confirmedBy;
+
+    @ManyToOne
+    @JoinColumn(name = "voucher_id")
+    private Voucher voucher;
+
+    // Lưu thực tế số tiền đã được trừ (bằng số)
+    @Column(name = "discount_amount")
+    private BigDecimal discountAmount = BigDecimal.ZERO;
+
+    @JoinColumn (name = "cancel_reason")
+    private String cancelReason;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    
+    @OneToMany (mappedBy = "order",
+                cascade = CascadeType.ALL,  // đồng bộ tất cả các thao tác (Lưu, Cập nhật, Xóa) từ thực thể cha xuống các thực thể con
+                orphanRemoval = true)
+    private List<OrderItem> orderItems = new ArrayList<>();
     public Order(Long id, String orderCode, User user, RestaurantTable table, String orderType, String status,
             BigDecimal subtotal, BigDecimal shippingFee, BigDecimal totalAmount, String receiverName,
-            String receiverPhone, String shippingAddress, String note, LocalDateTime cancelledAt, User confirmedBy,
-            LocalDateTime createdAt, LocalDateTime updatedAt) {
+            String receiverPhone, String shippingAddress, String note, LocalDateTime cancelledAt, User confirmedBy,Voucher voucher, BigDecimal discountAmount, String cancelReason,
+            LocalDateTime createdAt, LocalDateTime updatedAt, List<OrderItem> orderItems) {
         this.id = id;
         this.orderCode = orderCode;
         this.user = user;
@@ -58,8 +80,18 @@ public class Order {
         this.note = note;
         this.cancelledAt = cancelledAt;
         this.confirmedBy = confirmedBy;
+        this.voucher = voucher;
+        this.discountAmount = discountAmount;
+        this.cancelReason = cancelReason;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.orderItems = orderItems;
+    }
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
     }
     public Order(){}
     public Long getId() {
@@ -163,6 +195,24 @@ public class Order {
     }
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+    public Voucher getVoucher() {
+        return voucher;
+    }
+    public void setVoucher(Voucher voucher) {
+        this.voucher = voucher;
+    }
+    public String getCancelReason() {
+        return cancelReason;
+    }
+    public void setCancelReason(String cancelReason) {
+        this.cancelReason = cancelReason;
+    }
+    public BigDecimal getDiscountAmount() {
+        return discountAmount;
+    }
+    public void setDiscountAmount(BigDecimal discountAmount) {
+        this.discountAmount = discountAmount;
     }
     
 }

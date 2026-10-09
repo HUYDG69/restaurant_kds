@@ -1,6 +1,6 @@
 package com.group2.restaurant_kds.dto.bill;
 
-public class BillrequestDTO {
+public class BillRequestDTO {
     private Long orderId;
     private String paymentMethod;
     public Long getOrderId() {

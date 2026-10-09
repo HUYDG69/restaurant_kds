@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +26,8 @@ public class OrderItem {
     @JoinColumn (name = "foods_id")
     private Food food;
     private String foodsName;
+    @Enumerated(EnumType.STRING)
+    private OrderItemStatus status = OrderItemStatus.PENDING; // Mặc định khi gọi món là PENDING
     private BigDecimal unitPrice;
     private Integer quantity;
     private BigDecimal lineTotal;
@@ -80,5 +84,19 @@ public class OrderItem {
     public void setLineTotal(BigDecimal lineTotal) {
         this.lineTotal = lineTotal;
     }
-    
+
+    public OrderItemStatus getStatus() {
+        return status;
+    }
+    public void setStatus(OrderItemStatus status) {
+        this.status = status;
+    }
+
+    public enum OrderItemStatus {
+    PENDING,    // Mới gọi, chờ bếp xác nhận
+    COOKING,    // Bếp đang nấu
+    DONE,       // Nấu xong, chờ phục vụ mang ra
+    DELIVERED,  // Đã mang ra bàn cho khách
+    CANCELLED   // Khách hủy món / Hết nguyên liệu
+}
 }

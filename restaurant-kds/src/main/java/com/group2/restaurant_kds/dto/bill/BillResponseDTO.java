@@ -7,6 +7,20 @@ public class BillResponseDTO {
     private Long id;
     private Long orderId;
     private BigDecimal totalAmount;
+    private BigDecimal discount;
+    private String paymentMethod;
+    private LocalDateTime paidAt;
+
+    public BillResponseDTO (){}
+    public BillResponseDTO(Long id, Long orderId, BigDecimal totalAmount, BigDecimal discount, String paymentMethod,
+            LocalDateTime paidAt) {
+        this.id = id;
+        this.orderId = orderId;
+        this.totalAmount = totalAmount;
+        this.discount = discount;
+        this.paymentMethod = paymentMethod;
+        this.paidAt = paidAt;
+    }
     public Long getId() {
         return id;
     }
@@ -31,12 +45,6 @@ public class BillResponseDTO {
     public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
-    public BigDecimal getTax() {
-        return tax;
-    }
-    public void setTax(BigDecimal tax) {
-        this.tax = tax;
-    }
     public String getPaymentMethod() {
         return paymentMethod;
     }
@@ -49,8 +57,4 @@ public class BillResponseDTO {
     public void setPaidAt(LocalDateTime paidAt) {
         this.paidAt = paidAt;
     }
-    private BigDecimal discount;
-    private BigDecimal tax;
-    private String paymentMethod;
-    private LocalDateTime paidAt;
 }

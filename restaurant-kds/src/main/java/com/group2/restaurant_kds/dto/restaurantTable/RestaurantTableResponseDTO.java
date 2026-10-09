@@ -1,27 +1,16 @@
-package com.group2.restaurant_kds.entity;
+package com.group2.restaurant_kds.dto.restaurantTable;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity 
-@Table (name = "restaurant_tables")
-public class RestaurantTable {
-    @Id 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class RestaurantTableResponseDTO {
     private Long id;
     private String tableName;
     private Integer capacity;
-    private Boolean status;  // trống hay có khách
-    public RestaurantTable(Long id, String tableName, Integer capacity, Boolean status) {
+    private Boolean status;
+    public RestaurantTableResponseDTO(Long id, String tableName, Integer capacity, Boolean status) {
         this.id = id;
         this.tableName = tableName;
         this.capacity = capacity;
         this.status = status;
     }
-    public  RestaurantTable (){}
     public Long getId() {
         return id;
     }
@@ -46,5 +35,5 @@ public class RestaurantTable {
     public void setStatus(Boolean status) {
         this.status = status;
     }
-
+    
 }
